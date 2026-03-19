@@ -1,9 +1,19 @@
-site_name: Tommy Tech Notes
+site_name: Jianfei Tech Blog
 site_url: https://JeffD335.github.io/Tech-Blog/
 theme:
   name: material
   palette:
     scheme: slate
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Home: index.md
