@@ -1,0 +1,11 @@
+site_name: Tommy Tech Notes
+site_url: https://JeffD335.github.io/Tech-Blog/
+theme:
+  name: material
+  palette:
+    scheme: slate
+
+nav:
+  - Home: index.md
+  - DSA: 
+      - Learning DP in Combination Sum IV: dsa/leetcode-problem/combination-sum-iv.md
