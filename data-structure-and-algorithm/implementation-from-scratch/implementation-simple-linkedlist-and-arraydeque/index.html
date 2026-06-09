@@ -73,11 +73,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#implementation-simple-linkedlist-and-arraydeque" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -338,24 +333,6 @@
       
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Simple LinkedList and ArrayDeque
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -372,34 +349,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#implementation-simple-linkedlist-and-arraydeque" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementation Simple LinkedList and ArrayDeque
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -522,25 +471,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#implementation-simple-linkedlist-and-arraydeque" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementation Simple LinkedList and ArrayDeque
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -558,12 +488,11 @@
 
   <h1>Simple LinkedList and ArrayDeque</h1>
 
-<h2 id="implementation-simple-linkedlist-and-arraydeque">Implementation Simple LinkedList and ArrayDeque</h2>
-<p>在 proj1 中，我实现了两种 Deque。</p>
-<p>LinkedListDeque 是用双向链表实现的。每个节点由内部类 ListNode 表示，包含 item、prev 和 next。我使用 circular sentinel，让 sentinel 的 prev 和 next 在空链表时都指向自己。这样可以避免 null 特判，也不需要额外维护 first 和 last 指针。由于 sentinel.next 永远是第一个节点，sentinel.prev 永远是最后一个节点，所以 addFirst、addLast、removeFirst、removeLast 都可以在 O(1) 时间完成。</p>
-<p>ArrayDeque 是用 resizable circular array 实现的。它维护 nextFirst 和 nextLast 两个不变量：nextFirst 指向第一个元素前面的空位，nextLast 指向最后一个元素后面的空位。通过取模运算把逻辑 index 映射到底层数组 index，从而实现数组的循环使用。这样 addFirst、addLast、removeFirst、removeLast 不需要整体移动元素，能够达到 amortized O(1)。</p>
-<p>此外，我实现了 equals 和 iterator。equals 比较的是两个 deque 的逻辑序列，因此不同底层实现的 deque 只要元素顺序相同也应该相等。iterator 让 deque 支持 for-each 遍历。</p>
-<p>ArrayDeque 还实现了自动扩容和缩容：满时扩容，使用率过低时缩容。这样既能保证操作的 amortized O(1)，又能避免删除大量元素后继续占用过多内存。</p>
+<p>For this LinkedList(LinkedListDeque) I implemented, it's implemented by inner class <code>ListNode</code> . The whole LinkedListDeque class have one variable <code>size</code> and an invariant <code>ListNode sentinel</code> and it is circular which means it acts like two sentinel in front and back, but in fact just one of it. Since the <code>sentinel.next</code> always points to the first node and the sentinel.prev always points to the last node, so the <code>addFirst</code>, <code>addLast</code>, <code>removeFirst</code>, <code>removeLast</code> operations can be done in O(1) time complexity.</p>
+<p>For ArrayDeque, it was implemented by using resizable cicular array. It maintains two invariants <code>nextFirst</code> and <code>nextLast</code>: <code>nextFirst</code> points to empty space in front of first actual element, while the <code>nextLast</code> points to the empty space behind the last actual element. Using modulo operation mapping logical index to real array index, realizing array reusing. So that <code>addFirst</code>, <code>addLast</code>, <code>removeFirst</code>, <code>removeLast</code> operations do not need to move all the elements around and realize amortized O(1).</p>
+<p>In addition, It also achieves automatic capacity expansion and contraction: expansion when it about full, contraction when the logical size is way smaller than real length of the array. So that it making sure that add/ remove operations amortized O(1), and avoiding occupation excessive memory after deleting a large number of elements.</p>
+<p>Besides, I implemented equals and iterator. The equals method compares the logical sequences of two deques, so deques with different underlying implementations should be equal as long as their element orders are the same. The iterator method enables deques to support for-each traversal.</p>
+<p><strong>Simple Deque Interface</strong> </p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Deque</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -584,6 +513,7 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">);</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">}</span>
 </code></pre></div>
+<p><strong>LinkedListDeque</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Iterator</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -752,6 +682,7 @@
 <a id="__codelineno-1-166" name="__codelineno-1-166" href="#__codelineno-1-166"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-167" name="__codelineno-1-167" href="#__codelineno-1-167"></a><span class="p">}</span>
 </code></pre></div>
+<p><strong>ArrayDeque</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">deque</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
