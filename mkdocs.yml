@@ -1,5 +1,6 @@
 site_name: Jianfei Tech Blog
 site_url: https://JeffD335.github.io/Tech-Blog/
+
 theme:
   name: material
   palette:
@@ -17,5 +18,8 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - DSA: 
-      - Learning DP in Combination Sum IV: dsa/leetcode-problem/combination-sum-iv.md
+  - Data Structure and Algorithm:
+      - Implementation from Scratch:
+          - Simple LinkedList and ArrayDeque: data-structure-and-algorithm/implementation-from-scratch/implementation-simple-linkedlist-and-arraydeque.md
+      - Leetcode:
+          - Learning DP in Combination Sum IV: data-structure-and-algorithm/leetcode-problem/combination-sum-iv.md
