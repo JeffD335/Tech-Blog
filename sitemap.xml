@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://JeffD335.github.io/Tech-Blog/</loc>
-         <lastmod>2026-03-19</lastmod>
+         <lastmod>2026-06-09</lastmod>
     </url>
     <url>
-         <loc>https://JeffD335.github.io/Tech-Blog/dsa/leetcode-problem/combination-sum-iv/</loc>
-         <lastmod>2026-03-19</lastmod>
+         <loc>https://JeffD335.github.io/Tech-Blog/data-structure-and-algorithm/implementation-from-scratch/implementation-simple-linkedlist-and-arraydeque/</loc>
+         <lastmod>2026-06-09</lastmod>
+    </url>
+    <url>
+         <loc>https://JeffD335.github.io/Tech-Blog/data-structure-and-algorithm/leetcode-problem/combination-sum-iv/</loc>
+         <lastmod>2026-06-09</lastmod>
     </url>
 </urlset>
