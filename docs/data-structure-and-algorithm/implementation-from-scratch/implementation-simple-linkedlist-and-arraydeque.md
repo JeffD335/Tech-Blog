@@ -1,18 +1,12 @@
-## Implementation Simple LinkedList and ArrayDeque
+For this LinkedList(LinkedListDeque) I implemented, it's implemented by inner class ``ListNode`` . The whole LinkedListDeque class have one variable ``size`` and an invariant ``ListNode sentinel`` and it is circular which means it acts like two sentinel in front and back, but in fact just one of it. Since the ``sentinel.next`` always points to the first node and the sentinel.prev always points to the last node, so the ``addFirst``, ``addLast``, ``removeFirst``, ``removeLast `` operations can be done in O(1) time complexity.
 
+For ArrayDeque, it was implemented by using resizable cicular array. It maintains two invariants ``nextFirst`` and ``nextLast``: ``nextFirst`` points to empty space in front of first actual element, while the ``nextLast`` points to the empty space behind the last actual element. Using modulo operation mapping logical index to real array index, realizing array reusing. So that ``addFirst``, ``addLast``, ``removeFirst``, ``removeLast`` operations do not need to move all the elements around and realize amortized O(1).
 
+In addition, It also achieves automatic capacity expansion and contraction: expansion when it about full, contraction when the logical size is way smaller than real length of the array. So that it making sure that add/ remove operations amortized O(1), and avoiding occupation excessive memory after deleting a large number of elements.
 
-在 proj1 中，我实现了两种 Deque。
+Besides, I implemented equals and iterator. The equals method compares the logical sequences of two deques, so deques with different underlying implementations should be equal as long as their element orders are the same. The iterator method enables deques to support for-each traversal.
 
-LinkedListDeque 是用双向链表实现的。每个节点由内部类 ListNode 表示，包含 item、prev 和 next。我使用 circular sentinel，让 sentinel 的 prev 和 next 在空链表时都指向自己。这样可以避免 null 特判，也不需要额外维护 first 和 last 指针。由于 sentinel.next 永远是第一个节点，sentinel.prev 永远是最后一个节点，所以 addFirst、addLast、removeFirst、removeLast 都可以在 O(1) 时间完成。
-
-ArrayDeque 是用 resizable circular array 实现的。它维护 nextFirst 和 nextLast 两个不变量：nextFirst 指向第一个元素前面的空位，nextLast 指向最后一个元素后面的空位。通过取模运算把逻辑 index 映射到底层数组 index，从而实现数组的循环使用。这样 addFirst、addLast、removeFirst、removeLast 不需要整体移动元素，能够达到 amortized O(1)。
-
-此外，我实现了 equals 和 iterator。equals 比较的是两个 deque 的逻辑序列，因此不同底层实现的 deque 只要元素顺序相同也应该相等。iterator 让 deque 支持 for-each 遍历。
-
-ArrayDeque 还实现了自动扩容和缩容：满时扩容，使用率过低时缩容。这样既能保证操作的 amortized O(1)，又能避免删除大量元素后继续占用过多内存。
-
-
+**Simple Deque Interface** 
 
 ```java
 public interface Deque<T> {
@@ -36,7 +30,7 @@ public interface Deque<T> {
 }
 ```
 
-
+**LinkedListDeque**
 
 ```java
 import java.util.Iterator;
@@ -208,7 +202,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 }
 ```
 
-
+**ArrayDeque**
 
 ```java
 package deque;
